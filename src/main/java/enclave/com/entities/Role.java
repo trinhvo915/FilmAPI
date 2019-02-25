@@ -20,7 +20,6 @@ public class Role implements Serializable{
 	
 	@OneToMany(mappedBy="role")
 	private Set<User> listUser;
-	
 
 	public Role() {
 		super();
@@ -31,9 +30,6 @@ public class Role implements Serializable{
 		this.name_role = name_role;
 		this.listUser = listUser;
 	}
-
-
-
 	public Integer getId_role() {
 		return id_role;
 	}
@@ -56,10 +52,4 @@ public class Role implements Serializable{
 	public void setListUser(Set<User> listUser) {
 		this.listUser = listUser;
 	}
-	
-	
-	
-	
-	
-
 }

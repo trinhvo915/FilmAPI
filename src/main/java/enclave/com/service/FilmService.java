@@ -6,5 +6,6 @@ import enclave.com.entities.Film;
 
 public interface FilmService {
 	List<Film> findAllFilm();
+	List<Film> getTopFilm(String chars);
 
 }

@@ -19,6 +19,11 @@ public class FilmServiceImpl implements FilmService{
 	public List<Film> findAllFilm() {
 		return (List<Film>)filmRepository.findAll();
 	}
+
+	@Override
+	public List<Film> getTopFilm(String chars) {
+		return null;//(List<Film>)filmRepository.findByNameEndsWith(name);
+	}
 	
 	
 	

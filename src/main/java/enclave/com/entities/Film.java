@@ -2,8 +2,11 @@ package enclave.com.entities;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +15,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name = "films")
+@Table(name = "film")
 public class Film {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,10 +48,16 @@ public class Film {
 	@Column(name = "views_month")
 	private int views_month;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+                })
 	@JoinTable(name = "film_kindfilm",
 			joinColumns =  @JoinColumn(name = "id_film"),
 			inverseJoinColumns = @JoinColumn(name = "id_kind"))
+	
+	@JsonManagedReference
 	private Collection<KindFilm> kindFilm;
 
 	public long getId_film() {
