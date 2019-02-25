@@ -1,6 +1,7 @@
 package enclave.com.entities;
 
-import java.util.Collection;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class KindFilm {
 	
 	@ManyToMany(mappedBy = "kindFilm")
 	@JsonBackReference
-	private Collection<Film> films;
+	private Set<Film> films;
 
 	public long getId_kind() {
 		return id_kind;
@@ -34,11 +35,11 @@ public class KindFilm {
 		this.id_kind = id_kind;
 	}
 
-	public Collection<Film> getFilms() {
+	public Set<Film> getFilms() {
 		return films;
 	}
 
-	public void setFilms(Collection<Film> films) {
+	public void setFilms(Set<Film> films) {
 		this.films = films;
 	}
 
@@ -50,7 +51,7 @@ public class KindFilm {
 		this.name_kind = name_kind;
 	}
 
-	public KindFilm(long id_kind,String name_kind, Collection<Film> films) {
+	public KindFilm(long id_kind,String name_kind, Set<Film> films) {
 		super();
 		this.id_kind = id_kind;
 		this.name_kind = name_kind;

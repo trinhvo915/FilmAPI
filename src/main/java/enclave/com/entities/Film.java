@@ -1,7 +1,7 @@
 package enclave.com.entities;
 
 import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -58,7 +58,7 @@ public class Film {
 			inverseJoinColumns = @JoinColumn(name = "id_kind"))
 	
 	@JsonManagedReference
-	private Collection<KindFilm> kindFilm;
+	private Set<KindFilm> kindFilm;
 
 	public long getId_film() {
 		return id_film;
@@ -164,17 +164,17 @@ public class Film {
 		this.views_month = views_month;
 	}
 
-	public Collection<KindFilm> getKindFilm() {
+	public Set<KindFilm> getKindFilm() {
 		return kindFilm;
 	}
 
-	public void setKindFilm(Collection<KindFilm> kindFilm) {
+	public void setKindFilm(Set<KindFilm> kindFilm) {
 		this.kindFilm = kindFilm;
 	}
 
 	public Film(long id_film, String name_vn, String name_en, Timestamp date_create, int time, String actors,
 			String description, String link_img_avt, String link_img_bg, String link_film, String link_trailer,
-			int views_week, int views_month, Collection<KindFilm> kindFilm) {
+			int views_week, int views_month, Set<KindFilm> kindFilm) {
 		super();
 		this.id_film = id_film;
 		this.name_vn = name_vn;
@@ -192,7 +192,7 @@ public class Film {
 		this.kindFilm = kindFilm;
 	}
 
-	public Film(long id_film, String name_vn, String name_en, Timestamp date_create, Collection<KindFilm> kindFilm) {
+	public Film(long id_film, String name_vn, String name_en, Timestamp date_create, Set<KindFilm> kindFilm) {
 		super();
 		this.id_film = id_film;
 		this.name_vn = name_vn;
