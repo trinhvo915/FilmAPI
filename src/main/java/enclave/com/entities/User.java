@@ -1,8 +1,20 @@
 package enclave.com.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
@@ -10,7 +22,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_user;
 	
 	@Column(name = "username")
@@ -22,22 +34,50 @@ public class User implements Serializable {
 	@Column(name = "fullname")
 	private String fullname;
 	
-	@ManyToOne
-	@JoinColumn(name ="id_role")
-	private Role role;
+	@Column(name ="email")
+	private String email;
+		
+	@ManyToMany(fetch = FetchType.LAZY	)
+	@JoinTable(name = "user_role",
+		joinColumns =  @JoinColumn(name = "id_user"),
+		inverseJoinColumns = @JoinColumn(name = "id_role"))
+	private Set<Role> roles = new HashSet<>();;
+	
+	@OneToMany(mappedBy="user")
+	private Set<Comment> listComment;
+	
+	@OneToMany(mappedBy="user")
+	private Set<Favourite> listFavourite;
 	
 	public User() {
 		super();
 	}
-
-	public User(Integer id_user, String username, String password, String fullname, Role role) {
+	public User(Integer id_user, String username, String password,
+			String fullname, String email) {
 		this.id_user = id_user;
 		this.username = username;
 		this.password = password;
 		this.fullname = fullname;
-		this.role = role;
+		this.email = email;
+	}
+	public User( String username, String password,
+			String fullname, String email) {
+		this.username = username;
+		this.password = password;
+		this.fullname = fullname;
+		this.email = email;
 	}
 	
+	public User(Integer id_user, String username, String password,
+			String fullname, String email, Set<Role> roles) {
+		super();
+		this.id_user = id_user;
+		this.username = username;
+		this.password = password;
+		this.fullname = fullname;
+		this.email = email;
+		this.roles = roles;
+	}
 	/* Leo is wrote */
 	public Integer getId_user() {
 		return id_user;
@@ -71,23 +111,44 @@ public class User implements Serializable {
 		this.fullname = fullname;
 	}
 
-	public Role getRole() {
-		return role;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+//	
+//	public Set<Favourite> getListFavourite() {
+//		return listFavourite;
+//	}
+//	
+//	public void setListFavourite(Set<Favourite> listFavourite) {
+//		this.listFavourite = listFavourite;
+//	}
+//	
+//	public Set<Comment> getListComment() {
+//		return listComment;
+//	}
+//	
+//	public void setListComment(Set<Comment> listComment) {
+//		this.listComment = listComment;
+//	}
+	
+	@Override
+	public String toString() {
+		return "User [id_user=" + id_user + ", username=" + username
+				+ ", password=" + password + ", fullname=" + fullname
+				+ ", email=" + email + ", roles=" + roles + "]";
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

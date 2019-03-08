@@ -7,8 +7,7 @@ import enclave.com.entities.User;
 public interface UserService {
 	
 	List<User> findAllUser();
-	User findById(Integer id);
-	
+	List<User> findById(Integer id);
 	User saveUser(User user);
 	User updateUser(User user);
 	

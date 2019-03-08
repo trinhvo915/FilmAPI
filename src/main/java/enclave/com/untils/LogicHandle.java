@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import enclave.com.entities.Film;
+import enclave.com.entities.User;
 
 public class LogicHandle {
 	
@@ -21,6 +22,15 @@ public class LogicHandle {
 			return null;
 		}
 		return listfilmramdom;
+	}
+
+	public static boolean functionCheckUsername(List<User> listUser, User user) {
+		for (User userlist : listUser) {
+			if(userlist.getUsername().equals(user.getUsername())){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

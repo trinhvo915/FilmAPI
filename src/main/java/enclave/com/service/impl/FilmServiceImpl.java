@@ -46,6 +46,11 @@ public class FilmServiceImpl implements FilmService{
 		return (List<Film>)filmRepository.getFilmMonth();
 	}
 	
+	@Override
+	public List<Film> getFilmIdFilm(Integer id) {
+		return (List<Film>)filmRepository.getFilmIdFilm(id);
+	}
+	
 
 	
 	

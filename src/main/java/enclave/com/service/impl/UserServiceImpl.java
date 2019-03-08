@@ -2,30 +2,34 @@ package enclave.com.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import enclave.com.entities.User;
+import enclave.com.repository.UserRepository;
 import enclave.com.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{
 
+	@Autowired
+	UserRepository userRepository;
+	
 	@Override
 	public List<User> findAllUser() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> listUser = userRepository.findAll();
+		return listUser;
 	}
 
 	@Override
-	public User findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> findById(Integer id) {
+		return userRepository.getUserIdUser(id);	
 	}
 
 	@Override
 	public User saveUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		 user =  userRepository.save(user);
+		return user;
 	}
 
 	@Override

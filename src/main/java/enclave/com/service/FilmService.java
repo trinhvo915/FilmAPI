@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import enclave.com.entities.Film;
 
 public interface FilmService {
+	
 	List<Film> findAllFilm();
 	/* v1 - 25/02/2019 */
 	List<Film> getTopFilm12();
@@ -18,6 +19,9 @@ public interface FilmService {
 	List<Film> showListFilmWeek();
 	
 	List<Film> showListFilmMonth();
+	
+	List<Film> getFilmIdFilm(Integer id);
+	
 	
 	/* end*/
 }

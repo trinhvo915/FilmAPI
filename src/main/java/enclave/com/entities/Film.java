@@ -1,9 +1,10 @@
 package enclave.com.entities;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,13 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "film")
-public class Film {
+public class Film implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_film;
@@ -27,8 +29,8 @@ public class Film {
 	private String name_vn;
 	@Column(name = "name_en")
 	private String name_en;
-	@Column(name = "date_create")
-	private Timestamp date_create;
+	@Column(name = "year")
+	private Date year;
 	@Column (name = "time")
 	private int time;
 	@Column (name = "actors")
@@ -47,19 +49,20 @@ public class Film {
 	private int views_week;
 	@Column(name = "views_month")
 	private int views_month;
-
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-                })
+	
+	
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "film_kindfilm",
 			joinColumns =  @JoinColumn(name = "id_film"),
 			inverseJoinColumns = @JoinColumn(name = "id_kind"))
-	
-	@JsonManagedReference
-	private Set<KindFilm> kindFilm;
+	private Set<KindFilm> kindFilm = new HashSet<>();
 
+	@OneToMany(mappedBy="film")
+	private Set<Comment> listComment;
+	
+	@OneToMany(mappedBy="film")
+	private Set<Favourite> listFavourite;
+	
 	public long getId_film() {
 		return id_film;
 	}
@@ -84,12 +87,14 @@ public class Film {
 		this.name_en = name_en;
 	}
 
-	public Timestamp getDate_create() {
-		return date_create;
+	
+
+	public Date getYear() {
+		return year;
 	}
 
-	public void setDate_create(Timestamp date_create) {
-		this.date_create = date_create;
+	public void setYear(Date year) {
+		this.year = year;
 	}
 
 	public int getTime() {
@@ -171,15 +176,54 @@ public class Film {
 	public void setKindFilm(Set<KindFilm> kindFilm) {
 		this.kindFilm = kindFilm;
 	}
+//
+// 
+//	public Set<Comment> getListComment() {
+//		return listComment;
+//	}
+//
+//	public void setListComment(Set<Comment> listComment) {
+//		this.listComment = listComment;
+//	}
+//
+//	
+//	
+//	public Set<Favourite> getListFavourite() {
+//		return listFavourite;
+//	}
+//
+//	public void setListFavourite(Set<Favourite> listFavourite) {
+//		this.listFavourite = listFavourite;
+//	}
+	public Film(long id_film, String name_vn, String name_en, Date year,
+			int time, String actors, String description, String link_img_avt,
+			String link_img_bg, String link_film, String link_trailer,
+			int views_week, int views_month) {
+		super();
+		this.id_film = id_film;
+		this.name_vn = name_vn;
+		this.name_en = name_en;
+		this.year = year;
+		this.time = time;
+		this.actors = actors;
+		this.description = description;
+		this.link_img_avt = link_img_avt;
+		this.link_img_bg = link_img_bg;
+		this.link_film = link_film;
+		this.link_trailer = link_trailer;
+		this.views_week = views_week;
+		this.views_month = views_month;
+	}
 
-	public Film(long id_film, String name_vn, String name_en, Timestamp date_create, int time, String actors,
-			String description, String link_img_avt, String link_img_bg, String link_film, String link_trailer,
+	public Film(long id_film, String name_vn, String name_en, Date year,
+			int time, String actors, String description, String link_img_avt,
+			String link_img_bg, String link_film, String link_trailer,
 			int views_week, int views_month, Set<KindFilm> kindFilm) {
 		super();
 		this.id_film = id_film;
 		this.name_vn = name_vn;
 		this.name_en = name_en;
-		this.date_create = date_create;
+		this.year = year;
 		this.time = time;
 		this.actors = actors;
 		this.description = description;
@@ -192,17 +236,7 @@ public class Film {
 		this.kindFilm = kindFilm;
 	}
 
-	public Film(long id_film, String name_vn, String name_en, Timestamp date_create, Set<KindFilm> kindFilm) {
-		super();
-		this.id_film = id_film;
-		this.name_vn = name_vn;
-		this.name_en = name_en;
-		this.date_create = date_create;
-		this.kindFilm = kindFilm;
-	}
-
 	public Film() {
-		super();
 	}
 
 

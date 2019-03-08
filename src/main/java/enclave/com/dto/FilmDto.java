@@ -1,6 +1,6 @@
 package enclave.com.dto;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class FilmDto {
 	
@@ -10,7 +10,7 @@ public class FilmDto {
  
 	private String name_en;
  
-	private Timestamp date_create;
+	private Date year;
  
 	private int time;
  
@@ -36,14 +36,14 @@ public class FilmDto {
 		super();
 	}
 
-	public FilmDto(long id_film, String name_vn, String name_en, Timestamp date_create, int time, String actors,
+	public FilmDto(long id_film, String name_vn, String name_en, Date year, int time, String actors,
 			String description, String link_img_avt, String link_img_bg, String link_film, String link_trailer,
 			int views_week, int views_month) {
 		super();
 		this.id_film = id_film;
 		this.name_vn = name_vn;
 		this.name_en = name_en;
-		this.date_create = date_create;
+		this.year = year;
 		this.time = time;
 		this.actors = actors;
 		this.description = description;
@@ -79,12 +79,14 @@ public class FilmDto {
 		this.name_en = name_en;
 	}
 
-	public Timestamp getDate_create() {
-		return date_create;
+
+
+	public Date getYear() {
+		return year;
 	}
 
-	public void setDate_create(Timestamp date_create) {
-		this.date_create = date_create;
+	public void setYear(Date year) {
+		this.year = year;
 	}
 
 	public int getTime() {
