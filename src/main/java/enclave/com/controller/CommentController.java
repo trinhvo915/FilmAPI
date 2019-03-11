@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import enclave.com.dto.CommentDto;
 import enclave.com.entities.Comment;
-import enclave.com.entities.Film;
-import enclave.com.entities.User;
 import enclave.com.service.CommentService;
 import enclave.com.service.FilmService;
 import enclave.com.service.UserService;
-import enclave.com.untils.ConvertComment;
+import enclave.com.utils.ConvertComment;
 
 @RestController
 @RequestMapping("/comment")
@@ -72,25 +70,8 @@ public class CommentController {
 		
 	}
 	
-	@SuppressWarnings("unused")
-	@RequestMapping(value="/addComment",method=RequestMethod.POST)
-	ResponseEntity<CommentDto> addComment(@RequestBody CommentDto cmtdto){
-		List<User> listUser = userService.findById(cmtdto.getUser().getId_user());
-		User user = ConvertComment.getUserInList(listUser, cmtdto.getUser().getId_user());
-		List<Film> listFilm = filmService.getFilmIdFilm(Integer.parseInt(cmtdto.getFilm().getId_film()+""));
-		Film film = ConvertComment.getFilmInList(listFilm, Integer.parseInt(cmtdto.getFilm().getId_film()+""));
-		Comment comment = new Comment(cmtdto.getContent(),film,user);
-		if(comment != null){
-			commentService.addCommnet(comment);
-			return new ResponseEntity<CommentDto>(cmtdto,HttpStatus.OK);
-		}
-		return new ResponseEntity<CommentDto>(HttpStatus.NO_CONTENT);
-	}
-	
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/addComment1",method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<Comment> addComment1(@RequestBody Comment cmt){
-		System.out.println(cmt.toString());
 		if(cmt != null){
 			commentService.addCommnet(cmt);
 			return new ResponseEntity<Comment>(cmt,HttpStatus.OK);

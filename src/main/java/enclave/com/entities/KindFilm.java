@@ -25,30 +25,6 @@ public class KindFilm {
 	@ManyToMany(fetch = FetchType.LAZY,mappedBy = "kindFilm")
 	private Set<Film> films = new HashSet<>();
 
-	public long getId_kind() {
-		return id_kind;
-	}
-
-	public void setId_kind(long id_kind) {
-		this.id_kind = id_kind;
-	}
-
-//	public Set<Film> getFilms() {
-//		return films;
-//	}
-//
-//	public void setFilms(Set<Film> films) {
-//		this.films = films;
-//	}
-
-	public String getName_kind() {
-		return name_kind;
-	}
-
-	public void setName_kind(String name_kind) {
-		this.name_kind = name_kind;
-	}
-
 	public KindFilm(long id_kind,String name_kind) {
 		super();
 		this.id_kind = id_kind;
@@ -57,6 +33,29 @@ public class KindFilm {
 
 	public KindFilm() {
 	}
+	
+	public long getId_kind() {
+		return id_kind;
+	}
 
+	public void setId_kind(long id_kind) {
+		this.id_kind = id_kind;
+	}
+/*
+	public Set<Film> getFilms() {
+		return films;
+	}
+
+	public void setFilms(Set<Film> films) {
+		this.films = films;
+	}
+*/
+	public String getName_kind() {
+		return name_kind;
+	}
+
+	public void setName_kind(String name_kind) {
+		this.name_kind = name_kind;
+	}
 
 }

@@ -80,5 +80,6 @@ public class Comment implements Serializable{
 		return "Comment [id_cmt=" + id_cmt + ", content=" + content + ", film="
 				+ film + ", user=" + user + "]";
 	}
+	
 
 }

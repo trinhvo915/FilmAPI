@@ -59,13 +59,13 @@ public class Role implements Serializable{
 	public void setName_role(String name_role) {
 		this.name_role = name_role;
 	}
+/*
+	public Set<User> getListUser() {
+		return listUser;
+	}
 
-//	public Set<User> getListUser() {
-//		return listUser;
-//	}
-//
-//	public void setListUser(Set<User> listUser) {
-//		this.listUser = listUser;
-//	}
-
+	public void setListUser(Set<User> listUser) {
+		this.listUser = listUser;
+	}
+*/
 }

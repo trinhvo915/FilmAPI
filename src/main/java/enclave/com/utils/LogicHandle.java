@@ -1,4 +1,4 @@
-package enclave.com.untils;
+package enclave.com.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +25,35 @@ public class LogicHandle {
 	}
 
 	public static boolean functionCheckUsername(List<User> listUser, User user) {
-		for (User userlist : listUser) {
-			if(userlist.getUsername().equals(user.getUsername())){
-				return false;
+		if(!listUser.isEmpty()){
+			for (User userlist : listUser) {
+				if(userlist.getUsername().equals(user.getUsername())){
+					return false;
+				}
 			}
 		}
 		return true;
+	}
+
+	public static boolean functionCheckUser(List<User> listUser, User user) {
+		boolean flag = false;
+		if(!listUser.isEmpty()){
+			for (User item : listUser){
+				if(item.getId_user().equals(user.getId_user())){
+					for (User itemm : listUser){
+						if(itemm.getUsername().equals(user.getUsername())){
+							System.out.println("Username :  "+itemm.getUsername());
+							flag = true;
+							break;
+						}
+					}
+					
+				}
+			}
+		}
+		if(flag==true)
+			return true;
+		return false;
 	}
 
 }

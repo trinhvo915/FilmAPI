@@ -1,5 +1,4 @@
 package enclave.com.controller;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import enclave.com.entities.User;
 import enclave.com.service.impl.UserServiceImpl;
-import enclave.com.untils.LogicHandle;
+import enclave.com.utils.LogicHandle;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	
 	@Autowired
 	UserServiceImpl userService;
 	
@@ -31,7 +29,8 @@ public class UserController {
 		return errorListUser;
 	}
 	
-	@RequestMapping(value="/register", method= RequestMethod.POST)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value="/registerAnyAccount", method= RequestMethod.POST)
 	public ResponseEntity<User> RegisterUser( @RequestBody(required = false) User user){
 		//System.out.println("This is : "+user.getRoles());
 		List<User> listUser = userService.findAllUser();
@@ -40,8 +39,22 @@ public class UserController {
 			User userRegister = userService.saveUser(user);
 			return new ResponseEntity<User>(userRegister, HttpStatus.CREATED) ;
 		}
-		ResponseEntity<User> errorUser = new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		return errorUser;
+		String message = "Username is exited";
+		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value ="/update", method=RequestMethod.POST)
+	ResponseEntity<User> updateUser(@RequestBody(required = false) User user){
+		List<User> listUser = userService.findAllUser();
+		boolean checkFindUser = LogicHandle.functionCheckUser(listUser,user);
+		if(!checkFindUser){
+			User user_Update = userService.updateUser(user);
+			if(user_Update!=null){
+				return new ResponseEntity<User>(user,HttpStatus.OK);
+			}
+		}
+		String message = "Username is exited";
+		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
+	}
 }

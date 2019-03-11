@@ -44,10 +44,10 @@ public class User implements Serializable {
 	private Set<Role> roles = new HashSet<>();;
 	
 	@OneToMany(mappedBy="user")
-	private Set<Comment> listComment;
+	private Set<Comment> listComment = new HashSet<>();;
 	
 	@OneToMany(mappedBy="user")
-	private Set<Favourite> listFavourite;
+	private Set<Favourite> listFavourite = new HashSet<>();;
 	
 	public User() {
 		super();
@@ -126,22 +126,23 @@ public class User implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-//	
-//	public Set<Favourite> getListFavourite() {
-//		return listFavourite;
-//	}
-//	
-//	public void setListFavourite(Set<Favourite> listFavourite) {
-//		this.listFavourite = listFavourite;
-//	}
-//	
-//	public Set<Comment> getListComment() {
-//		return listComment;
-//	}
-//	
-//	public void setListComment(Set<Comment> listComment) {
-//		this.listComment = listComment;
-//	}
+/*
+	public Set<Favourite> getListFavourite() {
+		return listFavourite;
+	}
+	
+	public void setListFavourite(Set<Favourite> listFavourite) {
+		this.listFavourite = listFavourite;
+	}
+	
+	public Set<Comment> getListComment() {
+		return listComment;
+	}
+	
+	public void setListComment(Set<Comment> listComment) {
+		this.listComment = listComment;
+	}
+*/
 	
 	@Override
 	public String toString() {

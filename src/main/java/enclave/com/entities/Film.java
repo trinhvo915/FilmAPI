@@ -58,10 +58,55 @@ public class Film implements Serializable{
 	private Set<KindFilm> kindFilm = new HashSet<>();
 
 	@OneToMany(mappedBy="film")
-	private Set<Comment> listComment;
+	private Set<Comment> listComment = new HashSet<>(); ;
 	
 	@OneToMany(mappedBy="film")
-	private Set<Favourite> listFavourite;
+	private Set<Favourite> listFavourite = new HashSet<>();;
+	
+	public Film() {
+		super();
+	}
+
+	public Film(long id_film, String name_vn, String name_en, Date year,
+			int time, String actors, String description, String link_img_avt,
+			String link_img_bg, String link_film, String link_trailer,
+			int views_week, int views_month) {
+		super();
+		this.id_film = id_film;
+		this.name_vn = name_vn;
+		this.name_en = name_en;
+		this.year = year;
+		this.time = time;
+		this.actors = actors;
+		this.description = description;
+		this.link_img_avt = link_img_avt;
+		this.link_img_bg = link_img_bg;
+		this.link_film = link_film;
+		this.link_trailer = link_trailer;
+		this.views_week = views_week;
+		this.views_month = views_month;
+	}
+
+	public Film(long id_film, String name_vn, String name_en, Date year,
+			int time, String actors, String description, String link_img_avt,
+			String link_img_bg, String link_film, String link_trailer,
+			int views_week, int views_month, Set<KindFilm> kindFilm) {
+		super();
+		this.id_film = id_film;
+		this.name_vn = name_vn;
+		this.name_en = name_en;
+		this.year = year;
+		this.time = time;
+		this.actors = actors;
+		this.description = description;
+		this.link_img_avt = link_img_avt;
+		this.link_img_bg = link_img_bg;
+		this.link_film = link_film;
+		this.link_trailer = link_trailer;
+		this.views_week = views_week;
+		this.views_month = views_month;
+		this.kindFilm = kindFilm;
+	}
 	
 	public long getId_film() {
 		return id_film;
@@ -86,8 +131,6 @@ public class Film implements Serializable{
 	public void setName_en(String name_en) {
 		this.name_en = name_en;
 	}
-
-	
 
 	public Date getYear() {
 		return year;
@@ -176,69 +219,23 @@ public class Film implements Serializable{
 	public void setKindFilm(Set<KindFilm> kindFilm) {
 		this.kindFilm = kindFilm;
 	}
-//
-// 
-//	public Set<Comment> getListComment() {
-//		return listComment;
-//	}
-//
-//	public void setListComment(Set<Comment> listComment) {
-//		this.listComment = listComment;
-//	}
-//
-//	
-//	
-//	public Set<Favourite> getListFavourite() {
-//		return listFavourite;
-//	}
-//
-//	public void setListFavourite(Set<Favourite> listFavourite) {
-//		this.listFavourite = listFavourite;
-//	}
-	public Film(long id_film, String name_vn, String name_en, Date year,
-			int time, String actors, String description, String link_img_avt,
-			String link_img_bg, String link_film, String link_trailer,
-			int views_week, int views_month) {
-		super();
-		this.id_film = id_film;
-		this.name_vn = name_vn;
-		this.name_en = name_en;
-		this.year = year;
-		this.time = time;
-		this.actors = actors;
-		this.description = description;
-		this.link_img_avt = link_img_avt;
-		this.link_img_bg = link_img_bg;
-		this.link_film = link_film;
-		this.link_trailer = link_trailer;
-		this.views_week = views_week;
-		this.views_month = views_month;
+
+ /*
+	public Set<Comment> getListComment() {
+		return listComment;
 	}
 
-	public Film(long id_film, String name_vn, String name_en, Date year,
-			int time, String actors, String description, String link_img_avt,
-			String link_img_bg, String link_film, String link_trailer,
-			int views_week, int views_month, Set<KindFilm> kindFilm) {
-		super();
-		this.id_film = id_film;
-		this.name_vn = name_vn;
-		this.name_en = name_en;
-		this.year = year;
-		this.time = time;
-		this.actors = actors;
-		this.description = description;
-		this.link_img_avt = link_img_avt;
-		this.link_img_bg = link_img_bg;
-		this.link_film = link_film;
-		this.link_trailer = link_trailer;
-		this.views_week = views_week;
-		this.views_month = views_month;
-		this.kindFilm = kindFilm;
+	public void setListComment(Set<Comment> listComment) {
+		this.listComment = listComment;
 	}
 
-	public Film() {
+	public Set<Favourite> getListFavourite() {
+		return listFavourite;
 	}
 
-
-
+	public void setListFavourite(Set<Favourite> listFavourite) {
+		this.listFavourite = listFavourite;
+	}
+*/
+	
 }
