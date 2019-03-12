@@ -46,13 +46,21 @@ public class LogicHandle {
 							flag = true;
 							break;
 						}
-					}
-					
+					}	
 				}
 			}
 		}
 		if(flag==true)
 			return true;
+		return false;
+	}
+
+	public static boolean functionCheckFilm(List<Film> listFilm, Film film) {
+		for (Film item : listFilm) {
+			if(item.getId_film()==film.getId_film()){
+				return true ;
+			}
+		}
 		return false;
 	}
 

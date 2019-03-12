@@ -49,6 +49,9 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	private Set<Favourite> listFavourite = new HashSet<>();;
 	
+	@OneToMany(mappedBy="user")
+	private Set<Rate> listRate = new HashSet<>();
+	
 	public User() {
 		super();
 	}

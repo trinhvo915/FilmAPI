@@ -22,6 +22,9 @@ public interface FilmService {
 	
 	List<Film> getFilmIdFilm(Integer id);
 	
+	boolean addFilm(Film film);
+	boolean deleteFilm(Integer id);
+	Film updateFilm(Film film);
 	
 	/* end*/
 }

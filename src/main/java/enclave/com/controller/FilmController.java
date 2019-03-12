@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,6 +94,41 @@ public class FilmController {
 			return errorlistfilmMonth;
 		}
 		return new  ResponseEntity<>(listfilmMonth,HttpStatus.OK);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public ResponseEntity<Film> addFilm (@RequestBody Film film){
+		boolean checkFilm = filmService.addFilm(film);
+		if(checkFilm){
+			return new ResponseEntity<Film>(film,HttpStatus.OK);
+		}
+		String message = "Add Film not Success !!!";
+		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public ResponseEntity<Film> updateFilm (@RequestBody Film film){
+		List<Film> listFilm = filmService.findAllFilm();
+		boolean checkFilm = LogicHandle.functionCheckFilm(listFilm,film);
+		if(checkFilm){
+			filmService.updateFilm(film);
+			return new ResponseEntity<Film>(film,HttpStatus.OK);
+		}
+		String message = "Update Film not Success !!!";
+		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value="/delete/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<Film> deleteFilm (@PathVariable("id") Integer id){
+		boolean checkDeleteFilm = filmService.deleteFilm(id);
+		if(checkDeleteFilm){
+			String messageS = "Delete Success";
+			return new ResponseEntity(messageS,HttpStatus.OK);
+		}
+		String message = "Update Film not Success !!!";
+		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
 	}
 	
 

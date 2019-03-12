@@ -44,6 +44,11 @@ public class FavouriteServiceImpl implements FavouriteService{
 		}	
 		return false;
 	}
+
+	@Override
+	public Favourite getFavouriteById(Integer id) {
+		return favouriteRepository.getOne(Long.parseLong(id+""));
+	}
 	
 
 }

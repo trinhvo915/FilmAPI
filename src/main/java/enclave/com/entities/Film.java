@@ -63,6 +63,9 @@ public class Film implements Serializable{
 	@OneToMany(mappedBy="film")
 	private Set<Favourite> listFavourite = new HashSet<>();;
 	
+	@OneToMany(mappedBy="film")
+	private Set<Rate> listRate = new HashSet<>();
+	
 	public Film() {
 		super();
 	}

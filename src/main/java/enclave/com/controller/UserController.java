@@ -44,7 +44,7 @@ public class UserController {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value ="/update", method=RequestMethod.POST)
+	@RequestMapping(value ="/update", method=RequestMethod.PUT)
 	ResponseEntity<User> updateUser(@RequestBody(required = false) User user){
 		List<User> listUser = userService.findAllUser();
 		boolean checkFindUser = LogicHandle.functionCheckUser(listUser,user);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +36,7 @@ public class FavouriteController {
 	
 	
 	@RequestMapping(value="/addFavourite",method=RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity<Favourite> addComment1(@RequestBody Favourite favourite){
+	ResponseEntity<Favourite> addFavourite(@RequestBody Favourite favourite){
 		if(favourite != null){
 			favouriteServiceImpl.addFavourite(favourite);
 			return new ResponseEntity<Favourite>(favourite,HttpStatus.OK);
@@ -43,7 +44,20 @@ public class FavouriteController {
 		return new ResponseEntity<Favourite>(HttpStatus.NO_CONTENT);
 	}
 	
-	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value ="/delete/{id}",method=RequestMethod.DELETE)
+	ResponseEntity<Favourite> deleteFavourite(@PathVariable("id") Integer id){
+		Favourite favourite = favouriteServiceImpl.getFavouriteById(id);
+		if(favourite!=null){
+			boolean checkDelete = favouriteServiceImpl.deleteFavourite(id);
+			if(checkDelete){
+				String messageS = "Delete Success";
+				return new ResponseEntity(messageS,HttpStatus.OK);
+			}
+		}
+		String messageU = "Delete Not Success";
+		return new ResponseEntity(messageU,HttpStatus.NOT_FOUND);
+	}
 
 
 }

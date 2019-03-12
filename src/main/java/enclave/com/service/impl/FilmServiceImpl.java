@@ -50,6 +50,32 @@ public class FilmServiceImpl implements FilmService{
 	public List<Film> getFilmIdFilm(Integer id) {
 		return (List<Film>)filmRepository.getFilmIdFilm(id);
 	}
+
+	@Override
+	public boolean addFilm(Film film) {
+		Film filmInDB = filmRepository.save(film);
+		if(filmInDB != null){
+			filmRepository.save(film);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteFilm(Integer id) {
+		Film film = filmRepository.getOne(Long.parseLong(id+""));
+		if(film !=null){
+			filmRepository.delete(film);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Film updateFilm(Film film) {
+		// check film have exited in Class FilmController
+		return filmRepository.save(film);
+	}
 	
 
 	
