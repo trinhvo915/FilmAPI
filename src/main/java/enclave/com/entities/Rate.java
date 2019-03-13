@@ -39,7 +39,13 @@ public class Rate {
 		this.user = user;
 		this.film = film;
 	}
-
+	
+	public Rate(Rate rate) {
+		this.film = rate.getFilm();
+		this.user = rate.getUser();
+		this.score = rate.getScore();
+	}
+	
 	public Long getId_rate() {
 		return id_rate;
 	}

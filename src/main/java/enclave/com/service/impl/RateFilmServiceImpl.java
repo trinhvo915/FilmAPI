@@ -1,5 +1,6 @@
 package enclave.com.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,16 @@ public class RateFilmServiceImpl implements RateFilmService{
 		return rateFilmRepository.findAll();
 	}
 	
+	
+	@Override
+	public Float scoreFilm(long id_film) {
+		
+		ArrayList<Integer> listScore = rateFilmRepository.listScore(id_film);
+		float score = 0;
+		for (int item: listScore) {
+			score += item;
+		}
+		return score/listScore.size();
+	}
+
 }

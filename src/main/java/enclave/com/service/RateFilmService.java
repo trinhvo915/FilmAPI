@@ -8,5 +8,8 @@ public interface RateFilmService {
 	
 	List<Rate> getAllRate();
 	boolean addRateFilm(Rate rate);
+	
+	//List score of film via id_film
+	Float scoreFilm(long id_film);
 
 }

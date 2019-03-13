@@ -11,6 +11,18 @@ public interface UserService {
 	User saveUser(User user);
 	User updateUser(User user);
 	
-	boolean deleteUser(Integer id);
+	
+	public List<User> listUser();
+	
+	public User getUserByName(String name);
+	
+	public User getUserByNameAndPassword(String name, String password);
+	
+	public User getOneById(Integer id_user);
+	
+	public User addUser(User objUser);
+	
+	public void deleteUserById(Integer id_user);
+	
 
 }

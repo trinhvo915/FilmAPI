@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -41,6 +43,7 @@ public class User implements Serializable {
 	@JoinTable(name = "user_role",
 		joinColumns =  @JoinColumn(name = "id_user"),
 		inverseJoinColumns = @JoinColumn(name = "id_role"))
+	@JsonIgnoreProperties("users")
 	private Set<Role> roles = new HashSet<>();;
 	
 	@OneToMany(mappedBy="user")
@@ -63,6 +66,8 @@ public class User implements Serializable {
 		this.fullname = fullname;
 		this.email = email;
 	}
+	
+	
 	public User( String username, String password,
 			String fullname, String email) {
 		this.username = username;
@@ -81,14 +86,21 @@ public class User implements Serializable {
 		this.email = email;
 		this.roles = roles;
 	}
-	/* Leo is wrote */
+	
+	public User(User user) {
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.fullname = user.getFullname();
+		this.email = user.getEmail();
+	}
+	
+	
 	public Integer getId_user() {
 		return id_user;
 	}
 	public void setId_user(Integer id_user) {
 		this.id_user = id_user;
 	}
-	// ******//
 
 	public String getUsername() {
 		return username;
@@ -129,6 +141,7 @@ public class User implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
 /*
 	public Set<Favourite> getListFavourite() {
 		return listFavourite;

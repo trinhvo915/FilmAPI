@@ -34,4 +34,6 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	
 	@Query(nativeQuery=true,value="SELECT film.id_film,film.name_vn,film.name_en,film.year,film.time,film.actors,film.description,film.link_img_avt,film.link_img_bg,film.link_film,film.link_trailer,film.views_week,film.views_month FROM film LEFT JOIN favourite ON film.id_film = favourite.id_film LEFT JOIN users ON favourite.id_user = users.id_user WHERE favourite.id_user = :id")
 	List<Film> getListFilmFavourite(@Param("id") Integer id);
+	
+	
 }
