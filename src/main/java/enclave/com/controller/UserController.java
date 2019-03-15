@@ -74,9 +74,6 @@ public class UserController {
 		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
 	}
 	
-	//
-	//Get information User via Id
-	//
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@GetMapping("id-{id}")
 	public ResponseEntity<User> getUserById( @PathVariable(name = "id") Integer id){

@@ -43,6 +43,17 @@ public class FilmController {
 		return new ResponseEntity<>(listFilm,HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/search/{name}", method=RequestMethod.GET)
+	public ResponseEntity<List<Film>> SearchAllFilm(@PathVariable("name")String name){
+		System.out.println("name == "+name);
+		List<Film> listFilm = filmService.searchFilmByName(name);
+		if(listFilm.isEmpty()) {
+			ResponseEntity<List<Film>> errorListFilm = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return errorListFilm;
+		}
+		return new ResponseEntity<>(listFilm,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/top",method= RequestMethod.GET)
 	public ResponseEntity<List<Film>> getTopFilm(){
 		List<Film> listfilmtop = filmService.getTopFilm12();

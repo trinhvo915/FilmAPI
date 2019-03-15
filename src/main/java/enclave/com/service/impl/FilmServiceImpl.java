@@ -76,6 +76,11 @@ public class FilmServiceImpl implements FilmService{
 		// check film have exited in Class FilmController
 		return filmRepository.save(film);
 	}
+
+	@Override
+	public List<Film> searchFilmByName(String name) {
+		return filmRepository.getListFilmNameFilm(name);
+	}
 	
 
 	

@@ -32,6 +32,11 @@ public class Favourite implements Serializable{
 		super();
 	}
 
+	public Favourite(long id_favourite) {
+		super();
+		this.id_favourite = id_favourite;
+	}
+
 	public Favourite(long id_favourite, User user, Film film) {
 		this.id_favourite = id_favourite;
 		this.user = user;

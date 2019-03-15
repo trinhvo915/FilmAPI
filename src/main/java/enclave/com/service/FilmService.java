@@ -26,5 +26,6 @@ public interface FilmService {
 	boolean deleteFilm(Integer id);
 	Film updateFilm(Film film);
 	
+	List<Film> searchFilmByName(String name);
 	/* end*/
 }
