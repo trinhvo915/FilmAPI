@@ -1,8 +1,14 @@
 package enclave.com.repository;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import enclave.com.entities.Khoa;
+import enclave.com.entities.KindFilm;
+
+
+
+
 @Repository
-public interface KhoaRepository extends JpaRepository<Khoa, Long>{
+public interface KindFilmRepository extends JpaRepository<KindFilm, Long> {
+
 }

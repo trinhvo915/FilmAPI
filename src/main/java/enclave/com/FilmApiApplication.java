@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FilmApiApplication {
 
 	public static void main(String[] args) {
+		// this is main class to start project and it help to run application
 		SpringApplication.run(FilmApiApplication.class, args);
 	}
 
