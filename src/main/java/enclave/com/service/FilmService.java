@@ -27,6 +27,6 @@ public interface FilmService {
 	Film updateFilm(Film film);
 	
 	List<Film> searchFilmByName(String name);
-	Film setView(Integer id);
+	Film setView(Long id);
 	/* end*/
 }

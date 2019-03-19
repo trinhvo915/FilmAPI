@@ -165,4 +165,16 @@ public class FilmController {
 			return new ResponseEntity<RateDTO>(rateDTO, HttpStatus.OK);
 		}
 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value="/view/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Film> setViewFilm(@PathVariable("id") Long id){
+		Film film = filmService.setView(id);
+		if(film!=null){
+			String message = "Add view Success";
+			return new ResponseEntity( message, HttpStatus.OK);
+		}
+		String message = "Add view no Success";
+		return new ResponseEntity(message,HttpStatus.NOT_FOUND);	
+	}
 }
