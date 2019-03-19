@@ -82,6 +82,18 @@ public class FilmServiceImpl implements FilmService{
 		return filmRepository.getListFilmNameFilm(name);
 	}
 	
+	
+
+	@Override
+	public Film setView(Long id) {
+		Film film = filmRepository.getOne(id);
+		if(film != null){
+			System.out.println("=====>"+id);
+			filmRepository.setView(id);
+			return film;
+		}
+		return null;
+	}
 
 	
 	
