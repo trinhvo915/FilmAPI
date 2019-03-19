@@ -36,8 +36,9 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	List<Film> getListFilmFavourite(@Param("id") Integer id);
 		
 	@Query(nativeQuery=true,value="SELECT * FROM film WHERE name_vn LIKE CONCAT('%',:name,'%') OR name_en LIKE CONCAT('%',:name,'%')")
-	List<Film> getListFilmNameFilm(@Param("name") String name);	
-	
-
+	List<Film> getListFilmNameFilm(@Param("name") String name);
+	// id =  id film
+	@Query(nativeQuery=true,value="UPDATE film SET views_week = views_week + 1, views_month = views_month+1 WHERE id_film = :id")
+	Film getView(@Param("id") Integer id);
 	
 }
