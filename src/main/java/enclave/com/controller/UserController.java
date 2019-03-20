@@ -63,19 +63,44 @@ public class UserController {
 	@RequestMapping(value ="/update", method=RequestMethod.PUT)
 	ResponseEntity<User> updateUser(@RequestBody(required = false) User user){
 		
-		List<User> listUser = userService.findAllUser();
-		boolean checkFindUser = LogicHandle.functionCheckUser(listUser,user);
-		if(!checkFindUser){
-			User user_Update = userService.updateUser(user);
-			if(user_Update!=null){
-				return new ResponseEntity<User>(user,HttpStatus.OK);
+		//
+		// Check ID user exist
+		//
+		if (!userRepository.findById(user.getId_user()).isPresent()) {
+			TokenResult result = new TokenResult("false", "Not found this user id");
+			return new ResponseEntity(result, HttpStatus.NOT_FOUND);
+		} else {
+			//
+			// Check username exist
+			//
+			if (userRepository.getUserByName(user.getUsername()) != null) {
+				TokenResult result = new TokenResult("false", "This username has been exist");
+				return new ResponseEntity(result, HttpStatus.NOT_ACCEPTABLE);
+			} else {
+				//Get information old user via id_user
+				User oldUser = userService.getOneById(user.getId_user());
+				//Create new user
+				User newUser = new User(oldUser.getId_user(), oldUser.getUsername(), user.getPassword(), user.getFullname(), user.getEmail());
+				//No change password
+				if (user.getPassword() == null) {
+					newUser.setPassword(oldUser.getPassword());
+				} else {
+					//Encode password
+					String encodePWD = StringUtils.md5(user.getPassword());
+					newUser.setPassword(encodePWD);
+				}
+				
+				Set<Role> listRole = user.getRoles();
+				for (Role role: listRole) {
+					newUser.getRoles().add(roleRepository.findById(role.getId_role()).get());
+				}
+				userRepository.save(newUser);
+				return new ResponseEntity<User>(newUser, HttpStatus.OK);
 			}
 		}
-		String message = "Username is exited";
-		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("id-{id}")
 	public ResponseEntity<User> getUserById( @PathVariable(name = "id") Integer id){
 		if (userService.getOneById(id) == null) {
