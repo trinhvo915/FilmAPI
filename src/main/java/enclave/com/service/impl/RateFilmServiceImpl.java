@@ -43,4 +43,19 @@ public class RateFilmServiceImpl implements RateFilmService{
 		return score/listScore.size();
 	}
 
+	@Override
+	public Integer getScore(long id_film, long id_user) {
+		if (rateFilmRepository.getScore(id_film, id_user) == null) {
+			return 0;
+		} else {
+			return rateFilmRepository.getScore(id_film, id_user);
+		}
+	}
+
+	@Override
+	public void updateScore(long id_film, long id_user, float score) {
+		rateFilmRepository.updateScore(id_film, id_user, score);
+		
+	}
+
 }
