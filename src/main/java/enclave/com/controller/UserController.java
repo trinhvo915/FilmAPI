@@ -21,6 +21,7 @@ import enclave.com.service.impl.UserServiceImpl;
 import enclave.com.utils.ApiMessages;
 import enclave.com.utils.LogicHandle;
 import enclave.com.utils.StringUtils;
+import enclave.com.utils.TokenResult;
 
 @RestController
 @RequestMapping("/user")
@@ -167,28 +168,34 @@ public class UserController {
 		// Check ID user exist
 		//
 		if (!userRepository.findById(id_user).isPresent()) {
-			ApiMessages err = new ApiMessages("Not found user!");
-			return new ResponseEntity(err, HttpStatus.NOT_FOUND);
+			TokenResult result = new TokenResult("false", "Not found this user id");
+
+			return new ResponseEntity(result, HttpStatus.NOT_FOUND);
 		} else {
 			//
 			// Check username exist
 			//
 			if (userRepository.getUserByName(objUser.getUsername()) != null) {
-				ApiMessages err = new ApiMessages("Username " + objUser.getUsername() + "has been existed");
-				return new ResponseEntity(err, HttpStatus.NOT_ACCEPTABLE);
+				TokenResult result = new TokenResult("false", "This username has been exist");
+				return new ResponseEntity(result, HttpStatus.NOT_ACCEPTABLE);
 			} else {
 				User oldUser = userService.getOneById(id_user);
 				User newUser = new User(oldUser.getId_user(), oldUser.getUsername(), objUser.getPassword(), objUser.getFullname(), objUser.getEmail());
 				
+				//No change password
+				if (objUser.getPassword() == null) {
+					newUser.setPassword(oldUser.getPassword());
+				} else {
+					//Encode password
+					String encodePWD = StringUtils.md5(objUser.getPassword());
+					newUser.setPassword(encodePWD);
+				}				
 				Set<Role> listRole = objUser.getRoles();
 				Role role = new Role();
 				role = roleRepository.findOneByName("USER");
 				listRole.add(role);
 				newUser.getRoles().add(roleRepository.findById(role.getId_role()).get());
 				
-				//Encode password
-				String encodePWD = StringUtils.md5(objUser.getPassword());
-				newUser.setPassword(encodePWD);
 				
 				userRepository.save(newUser);
 				

@@ -35,8 +35,8 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	List<Film> getFilmMonth();
 	
 	@Query(nativeQuery=true,value="SELECT film.id_film,film.name_vn,film.name_en,film.year,film.time,film.actors,film.description,film.link_img_avt,film.link_img_bg,film.link_film,film.link_trailer,film.views_week,film.views_month FROM film LEFT JOIN favourite ON film.id_film = favourite.id_film LEFT JOIN users ON favourite.id_user = users.id_user WHERE favourite.id_user = :id")
-	List<Film> getListFilmFavourite(@Param("id") Integer id);
-		
+	List<Film> getListFilmFavourite(@Param("id") Integer id);	
+	
 	@Query(nativeQuery=true,value="SELECT * FROM film WHERE name_vn LIKE CONCAT('%',:name,'%') OR name_en LIKE CONCAT('%',:name,'%')")
 	List<Film> getListFilmNameFilm(@Param("name") String name);
 	// id =  id film
@@ -45,5 +45,8 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	@Modifying
 	@Query(nativeQuery=true,value="UPDATE film SET views_week = views_week + 1, views_month = views_month + 1 WHERE id_film = :id")
 	Integer setView(@Param("id") Long id);
+	
+	@Query(nativeQuery=true,value="SELECT film.id_film,film.name_vn,film.name_en,film.year,film.time,film.actors,film.description,film.link_img_avt,film.link_img_bg,film.link_film,film.link_trailer,film.views_week,film.views_month FROM film LEFT JOIN favourite ON film.id_film = favourite.id_film LEFT JOIN users ON favourite.id_user = users.id_user WHERE favourite.id_user = :id_user AND favourite.id_film = :id_film")
+	Film CheckFilmFavourite(@Param("id_user") Integer id_user, @Param("id_film") Integer id_film);
 	
 }

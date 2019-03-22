@@ -59,5 +59,15 @@ public class FavouriteController {
 		return new ResponseEntity(messageU,HttpStatus.NOT_FOUND);
 	}
 
+	@RequestMapping(value="/checkfavourite/{id_user}/{id_film}",method=RequestMethod.GET)
+	public ResponseEntity<Film> checkFavouriteFilm(@PathVariable("id_user") Integer id_user,@PathVariable("id_film") Integer id_film){
+		Film film = favouriteServiceImpl.checkFavouriteFilm(id_user, id_film);
+		if(film !=null){
+			return new ResponseEntity<Film>(film,HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<Film>(HttpStatus.NOT_FOUND);
+		
+	}
 
 }

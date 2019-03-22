@@ -17,6 +17,7 @@ public interface FavouriteService {
 	// id = idFavourite
 	Favourite getFavouriteById(Integer id);
 	
+	Film checkFavouriteFilm(Integer id_user, Integer id_film);
 	
 
 }
