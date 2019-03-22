@@ -3,6 +3,8 @@ package enclave.com.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import enclave.com.entities.Favourite;
@@ -53,6 +55,12 @@ public class FavouriteServiceImpl implements FavouriteService{
 	@Override
 	public Film checkFavouriteFilm(Integer id_user, Integer id_film) {
 		return filmRepository.CheckFilmFavourite(id_user, id_film) ;
+	}
+
+	@Override
+	public List<Film> getListFilmFavouritePageable(Integer id, Pageable pageable) {
+		List<Film> listFilm = filmRepository.getListFilmFavouritePageable(id, pageable);
+		return listFilm;
 	}
 
 	

@@ -2,6 +2,7 @@ package enclave.com.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,6 +38,11 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	@Query(nativeQuery=true,value="SELECT film.id_film,film.name_vn,film.name_en,film.year,film.time,film.actors,film.description,film.link_img_avt,film.link_img_bg,film.link_film,film.link_trailer,film.views_week,film.views_month FROM film LEFT JOIN favourite ON film.id_film = favourite.id_film LEFT JOIN users ON favourite.id_user = users.id_user WHERE favourite.id_user = :id")
 	List<Film> getListFilmFavourite(@Param("id") Integer id);
 		
+	//Get list film favourited of user
+	@Query(nativeQuery = true, value = "SELECT film.id_film,film.name_vn,film.name_en,film.year,film.time,film.actors,film.description,film.link_img_avt,film.link_img_bg,film.link_film,film.link_trailer,film.views_week,film.views_month FROM film LEFT JOIN favourite ON film.id_film = favourite.id_film LEFT JOIN users ON favourite.id_user = users.id_user WHERE favourite.id_user = :id")
+	List<Film> getListFilmFavouritePageable(@Param("id") Integer id, Pageable pageable);
+	
+	
 	@Query(nativeQuery=true,value="SELECT * FROM film WHERE name_vn LIKE CONCAT('%',:name,'%') OR name_en LIKE CONCAT('%',:name,'%')")
 	List<Film> getListFilmNameFilm(@Param("name") String name);	
 	

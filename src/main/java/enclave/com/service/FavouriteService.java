@@ -2,6 +2,9 @@ package enclave.com.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import enclave.com.entities.Favourite;
 import enclave.com.entities.Film;
 
@@ -12,6 +15,8 @@ public interface FavouriteService {
 	
 	boolean addFavourite(Favourite favourite);
 	
+	//Get list film favourited user pageable
+	List<Film> getListFilmFavouritePageable(Integer id, Pageable pageable);
 	
 	// id = idFavourite
 	Favourite getFavouriteById(Integer id);
