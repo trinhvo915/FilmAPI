@@ -36,10 +36,10 @@ public class FavouriteServiceImpl implements FavouriteService{
 	}
 	
 	@Override
-	public boolean deleteFavourite(Integer id) {
-		Favourite favourite = favouriteRepository.getOne(Long.parseLong(id+""));
-		if(favourite!=null){
-			favouriteRepository.delete(favourite);
+	public boolean deleteFavourite(Integer id_user, Integer id_film) {
+		Film film = filmRepository.CheckFilmFavourite(id_user, id_film) ;
+		if(film!=null){
+			favouriteRepository.deleteFilmFavourite(id_user, id_film);
 			return true;
 		}	
 		return false;
@@ -54,6 +54,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 	public Film checkFavouriteFilm(Integer id_user, Integer id_film) {
 		return filmRepository.CheckFilmFavourite(id_user, id_film) ;
 	}
+
 	
 
 }

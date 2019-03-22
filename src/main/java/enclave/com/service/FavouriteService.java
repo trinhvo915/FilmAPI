@@ -12,11 +12,12 @@ public interface FavouriteService {
 	
 	boolean addFavourite(Favourite favourite);
 	
-	boolean deleteFavourite(Integer id);
 	
 	// id = idFavourite
 	Favourite getFavouriteById(Integer id);
 	
 	Film checkFavouriteFilm(Integer id_user, Integer id_film);
+	
+	boolean deleteFavourite(Integer id_uer, Integer id_film);
 
 }
