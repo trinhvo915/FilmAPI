@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import enclave.com.entities.Favourite;
 import enclave.com.entities.Film;
 import enclave.com.service.impl.FavouriteServiceImpl;
+import enclave.com.utils.ApiMessages;
 
 @RestController
 @RequestMapping("/favourite")
@@ -59,14 +60,19 @@ public class FavouriteController {
 		return new ResponseEntity(messageU,HttpStatus.NOT_FOUND);
 	}
 	
+	//
+	//Check user favorited film
+	//
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/checkfavourite/{id_user}/{id_film}",method=RequestMethod.GET)
 	public ResponseEntity<Film> checkFavouriteFilm(@PathVariable("id_user") Integer id_user,@PathVariable("id_film") Integer id_film){
 		Film film = favouriteServiceImpl.checkFavouriteFilm(id_user, id_film);
 		if(film !=null){
-			return new ResponseEntity<Film>(film,HttpStatus.OK);
+			ApiMessages msg = new ApiMessages("true");
+			return new ResponseEntity(msg,HttpStatus.OK);
 		}
-
-		return new ResponseEntity<Film>(HttpStatus.NOT_FOUND);
+		ApiMessages msg = new ApiMessages("false");
+		return new ResponseEntity(msg,HttpStatus.NOT_FOUND);
 
 	}
 
