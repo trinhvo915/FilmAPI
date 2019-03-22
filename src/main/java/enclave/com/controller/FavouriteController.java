@@ -46,18 +46,15 @@ public class FavouriteController {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value ="/delete/{id}",method=RequestMethod.DELETE)
-	ResponseEntity<Favourite> deleteFavourite(@PathVariable("id") Integer id){
-		Favourite favourite = favouriteServiceImpl.getFavouriteById(id);
-		if(favourite!=null){
-			boolean checkDelete = favouriteServiceImpl.deleteFavourite(id);
-			if(checkDelete){
-				String messageS = "Delete Success";
-				return new ResponseEntity(messageS,HttpStatus.OK);
-			}
+	@RequestMapping(value ="/delete/{id_user}/{id_film}",method=RequestMethod.DELETE)
+	ResponseEntity<Favourite> deleteFavourite(@PathVariable("id_user") Integer id_user,@PathVariable("id_film") Integer id_film){
+		boolean checkFavourite = favouriteServiceImpl.deleteFavourite(id_user, id_film);
+		if(checkFavourite){
+			ApiMessages msg = new ApiMessages("delete favourite Success");
+			return new ResponseEntity(msg,HttpStatus.OK);
 		}
-		String messageU = "Delete Not Success";
-		return new ResponseEntity(messageU,HttpStatus.NOT_FOUND);
+		ApiMessages msg = new ApiMessages("Delete Not Success");
+		return new ResponseEntity(msg,HttpStatus.NOT_FOUND);
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="/checkfavourite/{id_user}/{id_film}",method=RequestMethod.GET)
