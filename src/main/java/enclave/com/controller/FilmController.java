@@ -121,8 +121,8 @@ public class FilmController {
 		if(checkFilm){
 			return new ResponseEntity<Film>(film,HttpStatus.OK);
 		}
-		String message = "Add Film not Success !!!";
-		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
+		ApiMessages msg = new ApiMessages("Add Film not Success");
+		return new ResponseEntity(msg,HttpStatus.NOT_FOUND);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -142,11 +142,11 @@ public class FilmController {
 	public ResponseEntity<Film> deleteFilm (@PathVariable("id") Integer id){
 		boolean checkDeleteFilm = filmService.deleteFilm(id);
 		if(checkDeleteFilm){
-			String messageS = "Delete Success";
-			return new ResponseEntity(messageS,HttpStatus.OK);
+			ApiMessages msg = new ApiMessages("Delete Success");
+			return new ResponseEntity(msg,HttpStatus.OK);
 		}
-		String message = "Update Film not Success !!!";
-		return new ResponseEntity(message,HttpStatus.NOT_FOUND);
+		ApiMessages msg = new ApiMessages("Delete Film not Success");
+		return new ResponseEntity(msg,HttpStatus.NOT_FOUND);
 	}
 	
 
@@ -171,10 +171,10 @@ public class FilmController {
 	public ResponseEntity<Film> setViewFilm(@PathVariable("id") Long id){
 		Film film = filmService.setView(id);
 		if(film!=null){
-			String message = "Add view Success";
-			return new ResponseEntity( message, HttpStatus.OK);
+			ApiMessages msg = new ApiMessages("Add view Success");
+			return new ResponseEntity( msg, HttpStatus.OK);
 		}
-		String message = "Add view no Success";
-		return new ResponseEntity(message,HttpStatus.NOT_FOUND);	
+		ApiMessages msg = new ApiMessages("Add view no Success");
+		return new ResponseEntity(msg,HttpStatus.NOT_FOUND);	
 	}
 }
