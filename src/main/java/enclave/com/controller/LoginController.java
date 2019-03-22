@@ -21,6 +21,7 @@ public class LoginController {
 	
 	
 	//Data input Object
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping("auth")
 	public ResponseEntity<User> login(@RequestBody User objUser){
 		//Incorrect username or password
