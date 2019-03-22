@@ -50,5 +50,10 @@ public class FavouriteServiceImpl implements FavouriteService{
 		return favouriteRepository.getOne(Long.parseLong(id+""));
 	}
 	
+	@Override
+	public Film checkFavouriteFilm(Integer id_user, Integer id_film) {
+		return filmRepository.CheckFilmFavourite(id_user, id_film) ;
+	}
+	
 
 }
