@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import enclave.com.dto.RateDTO;
 import enclave.com.entities.Film;
+import enclave.com.repository.FilmRepository;
 import enclave.com.service.FilmService;
 import enclave.com.service.RateFilmService;
 import enclave.com.utils.ApiMessages;
@@ -42,6 +43,22 @@ public class FilmController {
 		}
 		return new ResponseEntity<>(listFilm,HttpStatus.OK);
 	}
+	
+	//
+	//Get film by id
+	//
+	@GetMapping("{id_film}")
+	public ResponseEntity<Film> getFilmByIdFilm(@PathVariable("id_film") long id_film){
+		Film film = filmService.getFilmIdFilm((int)id_film);
+		if (film != null) {
+			return new ResponseEntity<Film>(film, HttpStatus.OK);
+		}
+		else {
+			ApiMessages err = new ApiMessages("Not found this id film: " + id_film);
+			return new ResponseEntity(err,HttpStatus.NO_CONTENT);
+		}
+	}
+	
 	
 	@RequestMapping(value="/search/{name}", method=RequestMethod.GET)
 	public ResponseEntity<List<Film>> SearchAllFilm(@PathVariable("name")String name){

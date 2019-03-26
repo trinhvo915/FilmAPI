@@ -23,7 +23,7 @@ public interface FilmRepository extends JpaRepository<Film, Long>{
 	List<Film> getFilmPage(Pageable pageable);
 	
 	@Query(value ="Select * from film f where f.id_film = :id", nativeQuery=true)
-	List<Film> getFilmIdFilm(@Param("id") Integer id);
+	Film getFilmIdFilm(@Param("id") Integer id);
 	
 	/* the function getRandomFilm() is not use in project */
 	@Query(nativeQuery=true, value="SELECT * FROM film RAND LIMIT 5")

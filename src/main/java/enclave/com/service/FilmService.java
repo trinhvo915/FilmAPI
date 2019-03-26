@@ -20,7 +20,7 @@ public interface FilmService {
 	
 	List<Film> showListFilmMonth();
 	
-	List<Film> getFilmIdFilm(Integer id);
+	Film getFilmIdFilm(Integer id);
 	
 	boolean addFilm(Film film);
 	boolean deleteFilm(Integer id);

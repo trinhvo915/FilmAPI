@@ -47,8 +47,8 @@ public class FilmServiceImpl implements FilmService{
 	}
 	
 	@Override
-	public List<Film> getFilmIdFilm(Integer id) {
-		return (List<Film>)filmRepository.getFilmIdFilm(id);
+	public Film getFilmIdFilm(Integer id) {
+		return filmRepository.getFilmIdFilm(id);
 	}
 
 	@Override
