@@ -60,10 +60,11 @@ public class FilmController {
 	}
 	
 	
-	@RequestMapping(value="/search/{name}", method=RequestMethod.GET)
-	public ResponseEntity<List<Film>> SearchAllFilm(@PathVariable("name")String name){
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public ResponseEntity<List<Film>> SearchAllFilm(@RequestParam("key")String name){
 		System.out.println("name == "+name);
-		List<Film> listFilm = filmService.searchFilmByName(name);
+		String nameSearch = LogicHandle.replaceName(name);
+		List<Film> listFilm = filmService.searchFilmByName(nameSearch);
 		if(listFilm.isEmpty()) {
 			ResponseEntity<List<Film>> errorListFilm = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			return errorListFilm;
