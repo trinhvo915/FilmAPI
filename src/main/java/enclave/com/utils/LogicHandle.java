@@ -63,5 +63,8 @@ public class LogicHandle {
 		}
 		return false;
 	}
-
+	public static String replaceName(String name) {
+		name = name.replace(" ", "%");
+		return name;
+	}
 }
