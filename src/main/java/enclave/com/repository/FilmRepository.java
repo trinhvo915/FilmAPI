@@ -16,7 +16,7 @@ import enclave.com.entities.Film;
 @Repository
 public interface FilmRepository extends JpaRepository<Film, Long>{
 	
-	@Query(value="SELECT * FROM film  ORDER BY id_film ASC Limit 0, 12	", nativeQuery=true)
+	@Query(value="SELECT * FROM film  ORDER BY id_film DESC Limit 0, 12	", nativeQuery=true)
 	List<Film> getFilmLimit12();
 	
 	@Query("SELECT e FROM Film e")

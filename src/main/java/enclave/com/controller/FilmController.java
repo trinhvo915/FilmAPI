@@ -85,7 +85,7 @@ public class FilmController {
 	@RequestMapping(value="/page",method= RequestMethod.GET)
 	public ResponseEntity<List<Film>> getPageFilm(@RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
 		      @RequestParam(name = "size", required = false, defaultValue = "12") Integer size,
-		      @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort){
+		      @RequestParam(name = "sort", required = false, defaultValue = "DESC") String sort){
 		Sort sortable = null;
 	    if (sort.equals("ASC")) {
 	      sortable = Sort.by("id").ascending();
